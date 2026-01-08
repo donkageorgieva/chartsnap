@@ -1,8 +1,16 @@
 import express from 'express';
 import cors from 'cors';
+import path from 'path';
+import YAML from 'yaml';
+import swaggerUi from 'swagger-ui-express';
+
+import { readFileSync } from 'fs';
 
 const app = express();
+const specPath = path.join(__dirname, '..', '..', 'spec', 'chartsnap.yaml');
+const openApiDoc = YAML.parse(readFileSync(specPath, 'utf8'));
 
+app.use('/docs', swaggerUi.serve, swaggerUi.setup(openApiDoc));
 app.use(cors());
 app.use(express.json({ limit: '2mb' }));
 app.use(express.urlencoded({ extended: true }));
