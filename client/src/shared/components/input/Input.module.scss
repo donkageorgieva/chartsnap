@@ -1,0 +1,29 @@
+@use '../../styles/variables' as *;
+
+.input {
+  width: 100%;
+  padding: 0.8rem 1rem;
+  border: 1px solid $color-input-border;
+  border-radius: 0.5rem;
+  background: #fff;
+  color: $color-slate-900;
+  font-size: 1rem;
+  transition:
+    border-color 120ms ease,
+    box-shadow 120ms ease;
+
+  &::placeholder {
+    color: rgba(15, 23, 42, 0.45);
+  }
+
+  &:focus-visible {
+    outline: none;
+    border-color: $color-input-focus;
+    box-shadow: 0 0 0 3px $color-input-focus-ring;
+  }
+
+  &:disabled {
+    background: $color-input-disabled;
+    cursor: not-allowed;
+  }
+}
