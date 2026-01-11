@@ -1,0 +1,38 @@
+@use '../../styles/mixins' as *;
+@use '../../styles/variables' as *;
+
+.button {
+  @include flex-center();
+  gap: 0.4rem;
+  padding: 0.85rem 1.25rem;
+  border: none;
+  border-radius: 0.75rem;
+  background: $color-primary;
+  color: $color-text-on-primary;
+  letter-spacing: 0.04em;
+  cursor: pointer;
+  transition:
+    background 150ms ease,
+    transform 150ms ease,
+    box-shadow 150ms ease;
+  box-shadow: 0 6px 16px $color-panel-shadow-strong;
+
+  &:hover:not(:disabled) {
+    background: $color-primary-hover;
+    transform: translateY(-1px);
+  }
+
+  &:active:not(:disabled) {
+    transform: translateY(1px);
+    box-shadow: 0 3px 8px $color-panel-shadow-strong;
+  }
+
+  &:disabled {
+    opacity: 0.55;
+    cursor: not-allowed;
+  }
+}
+
+.fullWidth {
+  width: 100%;
+}
