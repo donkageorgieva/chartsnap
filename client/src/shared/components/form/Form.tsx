@@ -1,17 +1,8 @@
-import { useForm, type FieldValues, type Path, type SubmitHandler } from 'react-hook-form';
+import { useForm, type FieldValues } from 'react-hook-form';
 import { Button } from '../button/Button';
-import { Input, type InputType } from '../input/Input';
+import { Input } from '../input/Input';
 import styles from './Form.module.scss';
-
-interface FormInput<TFieldValues extends FieldValues> {
-  name: Path<TFieldValues>;
-  type: InputType;
-}
-
-interface FormConfig<TFieldValues extends FieldValues> {
-  fields: FormInput<TFieldValues>[];
-  submitForm: SubmitHandler<TFieldValues>;
-}
+import type { FormConfig, FormInput } from './types';
 
 export function Form<TFieldValues extends FieldValues>({
   fields,

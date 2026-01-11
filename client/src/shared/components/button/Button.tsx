@@ -1,12 +1,5 @@
 import styles from './Button.module.scss';
-
-type ButtonType = React.ComponentPropsWithoutRef<'button'>['type'];
-
-interface ButtonProps {
-  onClick: () => void;
-  children: React.ReactNode;
-  type?: ButtonType;
-}
+import type { ButtonProps } from './types';
 
 export function Button({ onClick, children }: ButtonProps) {
   return (
