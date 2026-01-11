@@ -20,32 +20,73 @@ Trading screenshot journal focused on decision quality. Capture before/after cha
 
 ## Current status
 
-- `api/` Node workspace bootstrapped with Express + TypeScript deps.
-- `spec/` folder reserved for OpenAPI contract.
-- `.gitignore` covers Node artifacts and env files.
+- `api/` includes:
+  - Express server wired to the OpenAPI spec served at `/docs`.
+  - Auth routes (`/auth/register`, `/auth/login`, `/users/me`) with Prisma + JWT.
+  - Prisma schema, initial migration, and `.env.example`.
+- `client/` contains a Vite + React + TypeScript shell with SCSS support (`reset.scss`, mixins, global entry).
+- Root Prettier config + VS Code settings keep formatting consistent.
 
 ## Next steps
 
-1. Add `src/app.ts` and `src/server.ts`, wire CORS, JSON parsing, `/health`.
-2. Add npm scripts (`dev`, `build`, `start`, `spec:validate`).
-3. Draft OpenAPI spec (`spec/chartsnap.yaml`), expose via Swagger UI.
-4. Initialize Prisma (`npx prisma init`) with base models.
-5. Implement Auth & Journal Entry endpoints per spec.
+1. Flesh out the React UI (routing, layout shell, journaling flows).
+2. Implement journal-entry CRUD + file uploads in the API.
+3. Add automated tests (Vitest/RTL for client, integration tests for API).
+4. Containerize via Docker or add a root `npm run dev` that runs both workspaces concurrently.
+5. Prepare deployment scripts/infrastructure (Render/Fly.io/S3+CloudFront, etc.).
 
 ## Development
+
+### Prerequisites
+
+- Node.js 20.19+ (required by Vite and Prisma).
+- npm 10+ (ships with Node 20).
+
+### Backend (`api/`)
 
 ```bash
 cd api
 npm install
-npm run dev   # after scripts + server scaffold exist
+cp .env.example .env   # fill JWT_SECRET with a strong value
+npx prisma migrate dev # creates dev SQLite DB
+npm run dev            # http://localhost:4000
 ```
+
+Key scripts:
+
+| Script              | Description                        |
+| ------------------- | ---------------------------------- |
+| `npm run dev`       | ts-node-dev powered Express server |
+| `npm run build`     | TSC compile to `dist/`             |
+| `npm start`         | Run compiled server                |
+| `npm run spec:lint` | Lint the OpenAPI spec with Redocly |
 
 Environment variables (`api/.env`):
 
 ```
 PORT=4000
 DATABASE_URL="file:./dev.db"
-JWT_SECRET="dev-secret"
+JWT_SECRET="change-me"
 ```
 
-Copy from `.env.example` before running locally.
+### Frontend (`client/`)
+
+```bash
+cd client
+npm install
+npm run dev   # http://localhost:5173
+```
+
+Key scripts:
+
+| Script            | Description                        |
+| ----------------- | ---------------------------------- |
+| `npm run dev`     | Vite dev server with HMR           |
+| `npm run build`   | Type-check + Vite production build |
+| `npm run preview` | Serve the production build locally |
+
+Global styling lives in `src/index.scss`, which `@use`s partials like `shared/styles/_reset.scss` and `_mixins.scss`. Import additional shared styles there as the UI grows.
+
+### Spec
+
+`spec/chartsnap.yaml` is the source of truth for the API. View it via Swagger UI at `http://localhost:4000/docs` or lint it with `npm run spec:lint` inside `api/`.
