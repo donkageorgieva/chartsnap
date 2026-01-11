@@ -12,6 +12,8 @@ pnpm-debug.log*
 # Environment files
 .env
 .env.*
+!.env.example
+!/api/.env.example
 
 # OS/editor cruft
 .DS_Store
@@ -21,3 +23,5 @@ pnpm-debug.log*
 /api/node_modules/
 /api/dist/
 /api/.env
+/api/dev.db
+/api/prisma/dev.db

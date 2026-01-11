@@ -1,13 +1,12 @@
-
 # ChartSnap
 
 Trading screenshot journal focused on decision quality. Capture before/after charts, annotate key zones, track discipline, and analyze how process adherence impacts performance.
 
 ## Stack (planned)
 
-| Layer    | Tech                                                                 |
-|----------|----------------------------------------------------------------------|
-| Frontend | React + TypeScript, Vite, TanStack Query, React Hook Form + Zod, Tailwind + shadcn/ui, Recharts, Vitest + RTL |
+| Layer    | Tech                                                                                                               |
+| -------- | ------------------------------------------------------------------------------------------------------------------ |
+| Frontend | React + TypeScript, Vite, TanStack Query, React Hook Form + Zod, Tailwind + shadcn/ui, Recharts, Vitest + RTL      |
 | Backend  | Node.js + Express, OpenAPI (YAML-first) + Swagger UI, Prisma ORM, SQLite (dev) / PostgreSQL (prod), Multer uploads |
 
 ## High-level features
